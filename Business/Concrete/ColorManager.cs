@@ -1,5 +1,5 @@
 ﻿using Business.Abstract;
-using DataAccsess.Abstract;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
