@@ -7,6 +7,7 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Business.Concrete
@@ -54,10 +55,12 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(x => x.Id == carId),Messages.CarsListed);
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarDetails()
+        public IDataResult<List<CarDetailDto>> GetCarDetails(Expression<Func<Car, bool>> filter = null)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(),Messages.CarsListed);
         }
+
+     
 
         public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
         {
