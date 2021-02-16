@@ -6,6 +6,7 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Business.Concrete
@@ -34,9 +35,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.RentalListed);
         }
 
-        public IDataResult<List<RentalDetailDto>> GetAllRent()
+        public IDataResult<List<RentalDetailDto>> GetAllRent(Expression<Func<Rental, bool>> filter = null)
         {
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetCarDetails(filter), Messages.RentalSelected);
         }
 
         public IDataResult<Rental> GetById(int rentalId)

@@ -17,7 +17,7 @@ namespace ConsoleUI
             UserManager userManager = new UserManager(new EfUserDal());
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
-
+          
 
 
             //AddNewCar(carManager);
