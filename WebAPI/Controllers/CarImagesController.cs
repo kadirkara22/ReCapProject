@@ -1,6 +1,4 @@
 ﻿using Business.Abstract;
-using Business.Concrete;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,77 +11,48 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CarsController : ControllerBase
+    public class CarImagesController:ControllerBase
     {
-        ICarService _carService;
-
-        public CarsController(ICarService carService)
+        ICarImageService _carImageService;
+        public CarImagesController(ICarImageService carImageService)
         {
-            _carService = carService;
+            _carImageService = carImageService;
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            
-           var result= _carService.GetAll();
+            var result = _carImageService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
-        [HttpGet("getbyid")]
+        [HttpGet("geybyid")]
         public IActionResult GetById(int id)
         {
-            var result = _carService.GetById(id);
+            var result = _carImageService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
-        [HttpGet("getallcardetails")]
-        public IActionResult GetAllCarDetails()
+        [HttpGet("getcarimagebycarid")]
+        public IActionResult GetCarImagesByCar(int id)
         {
-            var result = _carService.GetCarDetails();
+            var result = _carImageService.GetCarImagesByCarId(id);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
-        [HttpGet("getcarbycolor")]
-        public IActionResult GetCarByColor(int id)
-        {
-
-            var result = _carService.GetCarDetails(x => x.ColorId == id);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-        [HttpGet("getcarbybrand")]
-        public IActionResult GetCarByBrand(int id)
-        {
-
-            var result = _carService.GetCarDetails(x => x.BrandId == id);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
         [HttpPost("add")]
-        public IActionResult Add(Car car)
+        public IActionResult Add([FromForm(Name ="Image")] IFormFile file,[FromForm] CarImage carImage)
         {
-           var result= _carService.Add(car);
+            var result = _carImageService.Add(file,carImage);
             if (result.Success)
             {
                 return Ok(result);
@@ -91,9 +60,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("delete")]
-        public IActionResult Delete(Car car)
+        public IActionResult Delete(CarImage carImage)
         {
-            var result = _carService.Delete(car);
+            var result = _carImageService.Delete(carImage);
             if (result.Success)
             {
                 return Ok(result);
@@ -101,9 +70,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("update")]
-        public IActionResult Update(Car car)
+        public IActionResult Update([FromForm(Name = "Image")] IFormFile file, [FromForm] CarImage carImage)
         {
-            var result = _carService.Update(car);
+            
+            var result = _carImageService.Update(file,carImage);
             if (result.Success)
             {
                 return Ok(result);
