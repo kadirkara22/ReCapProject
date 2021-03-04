@@ -39,16 +39,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet("getcarimagebycarid")]
-        public IActionResult GetCarImagesByCar(int id)
-        {
-            var result = _carImageService.GetCarImagesByCarId(id);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
+    
         [HttpPost("add")]
         public IActionResult Add([FromForm(Name ="Image")] IFormFile file,[FromForm] CarImage carImage)
         {

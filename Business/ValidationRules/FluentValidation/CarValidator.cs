@@ -13,9 +13,10 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(x => x.ModelYear).NotEmpty();
             RuleFor(x => x.Description).NotEmpty();
             RuleFor(x => x.DailyPrice).GreaterThan(0);
+            RuleFor(x => x.DailyPrice).NotEmpty();
             RuleFor(x => x.ColorId).NotEmpty();
             RuleFor(x => x.BrandId).NotEmpty();
-            RuleFor(x => x.CarName).MinimumLength(2);
+            
 
             //başka örnekler
             //RuleFor(x => x.CarName).Must(StartWithA).WithMessage("ürünler A ile başlamalı");

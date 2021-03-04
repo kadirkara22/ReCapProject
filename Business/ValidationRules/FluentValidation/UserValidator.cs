@@ -1,4 +1,5 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
+using Entities.Concrete;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,15 @@ namespace Business.ValidationRules.FluentValidation
     {
         public UserValidator()
         {
-            RuleFor(x => x.Id).NotEmpty();
+           
             RuleFor(x => x.FirstName).NotEmpty();
             RuleFor(x => x.LastName).NotEmpty();
             RuleFor(x => x.Email).NotEmpty();
-            RuleFor(x => x.Password).NotEmpty();
-            RuleFor(x => x.Password).Must(ValidatePassword);
+            //RuleFor(x => x.PasswordHash).NotEmpty();
+            //RuleFor(x => x.PasswordSalt).Must(ValidatePassword);
           
         }
-        
+        /*
         private bool ValidatePassword(string arg)
         {
             const int minPassword = 8;
@@ -29,8 +30,8 @@ namespace Business.ValidationRules.FluentValidation
                 throw new ArgumentNullException();
             }
             return password.Length >= minPassword;
-            
-            
+ 
         }
+        */
     }
 }

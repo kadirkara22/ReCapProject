@@ -1,5 +1,6 @@
 ﻿using Core.DataAccess.EntityFramework;
 using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework.Context;
 using Entities.Concrete;
 using Entities.DTOs;
 using System;
@@ -10,12 +11,12 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-   public class EfRentalDal:EfEntityRepositoryBase<Rental,ReCapProjectContext>,IRentalDal
+   public class EfRentalDal:EfEntityRepositoryBase<Rental, RentACarContext>,IRentalDal
     {
       
         public List<RentalDetailDto> GetCarDetails(Expression<Func<Rental, bool>> filter = null)
         {
-            using (ReCapProjectContext context=new ReCapProjectContext())
+            using (RentACarContext context =new RentACarContext())
             {
 				var result = from r in filter is null ? context.Rentals : context.Rentals.Where(filter)
 							 join c in context.Cars
@@ -28,14 +29,12 @@ namespace DataAccess.Concrete.EntityFramework
 							 on cu.UserId equals u.Id
 							 select new RentalDetailDto
 							 {
-								 Id = r.Id,
-								 BrandName = b.BrandName,
-								 CompanyName = cu.CompanyName,
-								 FirstName = u.FirstName,
-								 LastName = u.LastName,
-								 DailyPrice = c.DailyPrice,
-								 RentDate = r.RentDate,
-								 ReturnDate = r.ReturnDate
+								RentalId=r.Id,
+								CarName=b.BrandName,
+								CompanyName=cu.CompanyName,
+								UserName=u.FirstName+ " "+u.LastName,
+								RentDate=r.RentDate,
+								ReturnDate=r.ReturnDate
 							 };
 				return result.ToList();
 			}

@@ -52,7 +52,7 @@ namespace Business.Concrete
 
         public IDataResult<Rental> GetById(int rentalId)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(x => x.CarId == rentalId),Messages.RentalSelected);
+            return new SuccessDataResult<Rental>(_rentalDal.Get(x => x.Id == rentalId),Messages.RentalSelected);
         }
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Update(Rental rental)

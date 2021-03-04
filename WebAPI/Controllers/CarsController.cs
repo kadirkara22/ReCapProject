@@ -60,7 +60,7 @@ namespace WebAPI.Controllers
         public IActionResult GetCarByColor(int id)
         {
 
-            var result = _carService.GetCarDetails(x => x.ColorId == id);
+            var result = _carService.GetCarDetails(x => x.Id == id);
             if (result.Success)
             {
                 return Ok(result);
@@ -72,7 +72,7 @@ namespace WebAPI.Controllers
         public IActionResult GetCarByBrand(int id)
         {
 
-            var result = _carService.GetCarDetails(x => x.BrandId == id);
+            var result = _carService.GetCarDetails(x => x.Id == id);
             if (result.Success)
             {
                 return Ok(result);

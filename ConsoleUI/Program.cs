@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -17,17 +18,19 @@ namespace ConsoleUI
             UserManager userManager = new UserManager(new EfUserDal());
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            CarImageManager carImageManager = new CarImageManager(new EfCarImageDal());
             
 
+
+
+            
             //AddNewCar(carManager);
             //CarTest();
             //CustomerAdded(customerManager);
             //UserAdded(userManager);
-            RentAdd(rentalManager);
+            //RentAdd(rentalManager);
         }
 
-      
+    
 
         private static void AddNewCar(CarManager carManager)
         {
@@ -50,7 +53,7 @@ namespace ConsoleUI
             {
                 DailyPrice = fiyat,
                 ModelYear = modelYili,
-                CarName = marka,
+              
                 Description = aciklama,
                 BrandId = brandId,
                 ColorId = colorId
@@ -58,7 +61,7 @@ namespace ConsoleUI
 
             foreach (Car car in carManager.GetAll().Data)
             {
-                Console.WriteLine((car.Id,car.BrandId, car.ColorId, car.CarName, car.DailyPrice, car.ModelYear, car.Description));
+                Console.WriteLine((car.Id,car.BrandId, car.ColorId, car.DailyPrice, car.ModelYear, car.Description));
 
             }
         }
@@ -68,7 +71,7 @@ namespace ConsoleUI
 
             foreach (var car in carManager.GetCarDetails().Data)
             {
-                Console.WriteLine(car.CarName + " / " + car.BrandName);
+                Console.WriteLine(car.BrandName);
             }
 
 
@@ -88,14 +91,14 @@ namespace ConsoleUI
                 Console.WriteLine(customer.CompanyName);
             }
         }
-        private static void UserAdded(UserManager userManager)
+        /**private static void UserAdded(UserManager userManager)
         {
             userManager.Add(new User { FirstName = "kerem", LastName = "arif", Email = "keremarif@gmail.com", Password = "12345" });
             foreach (User user in userManager.GetAll().Data)
             {
                 Console.WriteLine(user.FirstName,user.LastName,user.Email,user.Password);
             }
-        }
+        }*/
         private static void RentAdd(RentalManager rentalManager)
         {
             List<Rental> rentals = new List<Rental>
