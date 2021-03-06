@@ -28,7 +28,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage)
         {
-          var result=  BusinessRules.Run(CheckCarImageLimit(carImage));
+          var result=  BusinessRules.Run(CheckCarImageLimit(carImage),CheckIfCarImageNull(carImage.CarId));
             if (result!=null)
             {
                 return result;
@@ -94,16 +94,27 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
-        private List<CarImage> CheckIfCarImageNull(int id)
+        private IDataResult<List<CarImage>> CheckIfCarImageNull(int id)
         {
-            string path = @"\wwwroot\logo.jpg";
-            var result = _carImageDal.GetAll(x => x.CarId == id).Any();
-            if (!result)
+            try
             {
-                return new List<CarImage> { new CarImage { CarId = id, ImagePath = path, Date = DateTime.Now } };
+                string path = @"\wwwroot\Images\logo.jpg";
+                var result =_carImageDal.GetAll(c => c.CarId == id).Any();
+                if (!result)
+                {
+                    List<CarImage> carimage = new List<CarImage>();
+                    carimage.Add(new CarImage { CarId = id, ImagePath = path, Date = DateTime.Now });
+                    return new SuccessDataResult<List<CarImage>>(carimage);
+                }
             }
-            return _carImageDal.GetAll(x => x.CarId == id);
+            catch (Exception exception)
+            {
+
+                return new ErrorDataResult<List<CarImage>>(exception.Message);
+            }
+
+            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(p => p.CarId == id).ToList());
         }
-  
+
     }
 }

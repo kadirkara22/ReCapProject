@@ -14,8 +14,8 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(x => x.Description).NotEmpty();
             RuleFor(x => x.DailyPrice).GreaterThan(0);
             RuleFor(x => x.DailyPrice).NotEmpty();
-            RuleFor(x => x.ColorId).NotEmpty();
-            RuleFor(x => x.BrandId).NotEmpty();
+            //RuleFor(x => x.ColorId).NotEmpty();
+            //RuleFor(x => x.BrandId).NotEmpty();
             
 
             //başka örnekler
