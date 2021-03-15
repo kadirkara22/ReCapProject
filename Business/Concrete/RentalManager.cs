@@ -45,9 +45,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(), Messages.RentalListed);
         }
 
-        public IDataResult<List<RentalDetailDto>> GetAllRent(Expression<Func<Rental, bool>> filter = null)
+        public IDataResult<List<RentalDetailDto>> GetRentalDetails(Expression<Func<Rental, bool>> filter = null)
         {
-            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetCarDetails(filter), Messages.RentalSelected);
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails(filter), Messages.RentalSelected);
         }
 
         public IDataResult<Rental> GetById(int rentalId)
@@ -64,10 +64,11 @@ namespace Business.Concrete
 
         private IResult CheckCarExistInRentList(Rental rental)
         {
-            if (rental.ReturnDate==null &&_rentalDal.GetCarDetails(x=>x.CarId==rental.CarId).Count>0)
+            if (rental.ReturnDate==null &&_rentalDal.GetRentalDetails(x=>x.CarId==rental.CarId).Count>0)
             {
                 return new ErrorResult(Messages.NotRentalAddOrUpdate);
             }
+            rental.RentDate = DateTime.Now;
             return new SuccessResult();
         }
     }
