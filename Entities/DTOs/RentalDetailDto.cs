@@ -13,8 +13,7 @@ namespace Entities.DTOs
         public string BrandName { get; set; }
         public string Decription { get; set; }
         public decimal DailyPrice { get; set; }
-        //public string FirstName { get; set; }
-        //public string LastName { get; set; }
+        public string CustomerName { get; set; }
         public string CompanyName { get; set; }
         public DateTime RentDate { get; set; }
         public DateTime? ReturnDate { get; set; }

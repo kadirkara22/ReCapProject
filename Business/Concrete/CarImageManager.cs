@@ -68,11 +68,10 @@ namespace Business.Concrete
             return new SuccessDataResult<CarImage>(_carImageDal.Get(x => x.Id == id),Messages.CarImageListed);
         }
 
-        public IDataResult<List<CarImage>> GetCarImagesByCarId(int id)
+        public IDataResult<List<CarImage>> GetImagesByCarId(int id)
         {
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(x => x.CarId == id), Messages.CarImageListed);
         }
-
 
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(IFormFile file, CarImage carImage)

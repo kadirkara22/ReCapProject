@@ -62,10 +62,15 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarsListed);
         }
         [CacheAspect]
-        [PerformanceAspect(5)]
+        [PerformanceAspect(15)]
         public IDataResult<Car> GetById(int carId)
         {
             return new SuccessDataResult<Car>(_carDal.Get(x => x.Id == carId),Messages.CarsListed);
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetail(int carId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(x => x.Id == carId));
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails(Expression<Func<Car, bool>> filter = null)
@@ -73,16 +78,24 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(filter),Messages.CarsListed);
         }
 
-     
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandId(int brandId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(x =>x.BrandId == brandId));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByColorId(int colorId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(x => x.ColorId == colorId));
+        }
 
         public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(x => x.Id == brandId));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(x => x.BrandId == brandId), Messages.BrandListed);
         }
 
         public IDataResult<List<Car>> GetCarsByColorId(int colorId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(x=> x.Id == colorId));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(x => x.ColorId == colorId), Messages.ColorListed);
         }
 
         [ValidationAspect(typeof(CarValidator))]
