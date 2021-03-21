@@ -97,12 +97,12 @@ namespace Business.Concrete
         {
             try
             {
-                string path = @"\wwwroot\Images\logo.jpg";
+                
                 var result =_carImageDal.GetAll(c => c.CarId == id).Any();
                 if (!result)
                 {
                     List<CarImage> carimage = new List<CarImage>();
-                    carimage.Add(new CarImage { CarId = id, ImagePath = path, Date = DateTime.Now });
+                    carimage.Add(new CarImage { CarId = id, ImagePath ="Default.jpg", Date = DateTime.Now });
                     return new SuccessDataResult<List<CarImage>>(carimage);
                 }
             }
