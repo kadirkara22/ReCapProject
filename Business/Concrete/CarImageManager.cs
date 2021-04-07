@@ -7,6 +7,7 @@ using Core.Utilities.FileHelper;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -68,9 +69,9 @@ namespace Business.Concrete
             return new SuccessDataResult<CarImage>(_carImageDal.Get(x => x.Id == id),Messages.CarImageListed);
         }
 
-        public IDataResult<List<CarImage>> GetImagesByCarId(int id)
+        public IDataResult<List<CarImageDto>> GetImagesByCarId(int id)
         {
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(x => x.CarId == id), Messages.CarImageListed);
+            return new SuccessDataResult<List<CarImageDto>>(_carImageDal.GetCarImageDetails(x => x.CarId == id), Messages.CarImageListed);
         }
 
         [ValidationAspect(typeof(CarImageValidator))]
