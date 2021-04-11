@@ -61,5 +61,10 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<User>(_userdal.Get(x => x.Email == email));
         }
+        public IDataResult<List<User>> GetByName(string name)
+        {
+            return new SuccessDataResult<List<User>>(_userdal.GetAll(x => x.FirstName == name), Messages.Usersucceed);
+
+        }
     }
 }

@@ -80,6 +80,18 @@ namespace WebAPI.Controllers
         [HttpPost("add")]
         public IActionResult Add(Rental rental)
         {
+            if (_rentalService.GetAll().Data.Count != 0)
+            {
+                if (_rentalService.IsRentable(rental))
+                {
+                    var result1 = _rentalService.Add(rental);
+                    if (result1.Success)
+                    {
+                        return Ok(result1);
+                    }
+
+                }
+            }
             var result = _rentalService.Add(rental);
             if (result.Success)
             {

@@ -9,9 +9,7 @@ namespace Business.Abstract
 {
    public interface IUserService
     {
-        //List<OperationClaim> GetClaims(User user);
-        //User GetByMail(string email);
-        //void Add(User user);
+     
 
         IResult Add(User user);
         IResult Delete(User user);
@@ -20,6 +18,7 @@ namespace Business.Abstract
         IDataResult<User> GetById(int id);
         IDataResult<List<OperationClaim>> GetClaims(User user);
         IDataResult<User> GetByMail(string email);
+        IDataResult<List<User>> GetByName(string name);
 
 
 

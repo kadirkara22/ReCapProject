@@ -64,5 +64,8 @@ namespace Business.Constants
         public static string SuccessfulLogin = "Sisteme giriş başarılı";
         public static string BrandAndColorListed = "Marka ve Renk listelendi";
         public static string added = "Eklendi";
+        public static string Paymentlisted = "listelendi";
+        public static string Paymentsucceed = "Payment başarılı";
+        public static string Usersucceed = "User başarılı";
     }
 }

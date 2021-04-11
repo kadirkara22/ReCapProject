@@ -28,5 +28,25 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+        [HttpPost("getall")]
+        public IActionResult GetAll()
+        {
+            var result = _paymentService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpGet("getcardnumber")]
+        public IActionResult GetCardNumber(int id)
+        {
+            var result = _paymentService.GetCardNumber(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }

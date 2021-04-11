@@ -35,7 +35,8 @@ namespace DataAccess.Concrete.EntityFramework
                                 Description=c.Description,
                                 ModelYear=c.ModelYear,
                                 CarImageDate = ci.Date,
-                                ImagePath = ci.ImagePath
+                                ImagePath = ci.ImagePath,
+                                 Findeks = c.Findeks,
                              };
 
                 return result.ToList();

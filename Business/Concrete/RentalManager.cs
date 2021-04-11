@@ -9,6 +9,7 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
@@ -60,7 +61,17 @@ namespace Business.Concrete
             _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUpdated);
         }
+        public Boolean IsRentable(Rental rental)
+        {
+            var result = _rentalDal.GetAll(r => r.CarId == rental.CarId);
 
+            if (result.Any(r =>
+                r.RentEndDate >= rental.RentStartDate &&
+                r.RentStartDate <= rental.RentEndDate
+            )) return true;
+
+            return false;
+        }
 
         private IResult CheckCarExistInRentList(Rental rental)
         {

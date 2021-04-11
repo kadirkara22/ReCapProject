@@ -22,5 +22,15 @@ namespace Business.Concrete
             _paymentDal.Add(payment);
             return new SuccessResult(Messages.added);
         }
+        public IDataResult<List<Payment>> GetAll()
+        {
+            return new SuccessDataResult<List<Payment>>(_paymentDal.GetAll(), Messages.Paymentlisted);
+
+        }
+
+        public IDataResult<List<Payment>> GetCardNumber(int id)
+        {
+            return new SuccessDataResult<List<Payment>>(_paymentDal.GetAll(x => x.UserId == id), Messages.Paymentsucceed);
+        }
     }
 }
